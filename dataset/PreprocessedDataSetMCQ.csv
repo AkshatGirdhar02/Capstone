@@ -22,7 +22,6 @@ question,A,B,C,D,answer,explanation
  What is true about Instance Variables in java?,Instance variables are declared in a class,When a space is allocated for an object in the heap,,,a slot for each instance variable value is created.,Instance variables can be declared in class level before or after use
  Which variables have no default values?,Static Variables,Instance Variables,Local Variable,Both A and B,C,There is no default value for local variables
  Static variables can be accessed by calling with the?,Object name,Class name,Function name,Can not say,B,Static variables can be accessed by calling with the class name ClassName.VariableName.]
- Which of the following is an Example of variable initialization?,int a,,,,b,
  Access modifiers cannot be used for local variables,Yes,No,Can be yes or no,Can not say,A,Yes
  A program P reads in 500 integers in the range [0,An array of 50 numbers,An array of 100 numbers,An array of 500 numbers,A dynamically allocated array of 550 numbers,A,An array of size 50 looks the best option to store number of students for each score. We need to store frequencies of scores above 50. We can ignore scores below 50 and to index the scores above 50
  Which of these best describes an array?,A data structure that shows a hierarchical behavior,Container of objects of similar types,Container of objects of mixed types,All of the mentioned,B,Array contains elements only of the same type.]
@@ -69,7 +68,6 @@ The smallest element of an array's index is called its,lower bound.,upper bound.
 "On which of the following statements does the time complexity of checking if an edge exists between two particular vertices is not, depends?",Depends on the number of edges,Depends on the number of vertices,Is independent of both the number of edges and vertices,It depends on both the number of edges and vertices,C,To check if there is an edge between to vertices i and j
  The degree sequence of a simple graph is the sequence of the degrees of the nodes in the graph in decreasing order,I and II,III and IV,IV only,II and IV,D,No explanation]
  What is the maximum number of edges in a bipartite graph having 10 vertices?,24,21,25,16,C,Let one set have n vertices another set would contain 10-n vertices.
-" Possible number of labelled simple Directed, Pseudo and Multigarphs exist having 2 vertices?",3,,,,Infinite,
 The most efficient algorithm for finding the number of connected components in an undirected graph on n vertices and m edges has time complexity,A,B,C,D,C,Connected components can be found in O(m + n) using Tarjans algorithm. Once we have connected components
 " What is time complexity to check if a string(length S1) is a substring of another string(length S2) stored in a Directed Acyclic Word Graph, given S2 is greater than S1?",O(S1),O(S2),O(S1+S2),O(1),A,For each check of a word of length S1
  What is the number of edges present in a complete graph having n vertices?,(n*(n+1))/2,(n*(n-1))/2,n,Information given is insufficient,B,Number of ways in which every vertex can be connected to each other is nC2.]
@@ -77,18 +75,14 @@ The most efficient algorithm for finding the number of connected components in a
   Which of the following properties does a simple graph not hold?,Must be connected,Must be unweighted,Must have no loops or multiple edges,All of the mentioned,A,A simple graph maybe connected or disconnected.]
  Which of the following is true?,A graph may contain no edges and many vertices,A graph may contain many edges and no vertices,A graph may contain no edges and no vertices,None of the mentioned,B,A graph must contain at least one vertex.]
 "  For a given graph G having v vertices and e edges which is connected and has no cycles, which of the following statements is true?",v=e,v = e+1,v + 1 = e,None of the mentioned,B,For any connected graph with no cycles the equation holds true.]
- for which of the following combinations of the degrees of vertices would the connected graph be eulerian?,1,,,,2,
   A graph with all vertices having equal degree is known as a,Multi Graph,Regular Graph,Simple Graph,Complete Graph,B,The given statement is the definition of regular graphs.
- Which of the following ways can be used to represent a graph?,Adjacency List and Adjacency Matrix,Incidence Matrix,Adjacency List,,Adjacency Matrix as well as Incidence Matrix,None of the mentioned
  The time complexity to calculate the number of edges in a graph whose information in stored in form of an adjacency matrix is,O(V),O(E2),O(E),O(V2),D,As V entries are 0
  Which of the following statements for a simple graph is correct?,Every path is a trail,Every trail is a path,Every trail is a path as well as every path is a trail,None of the mentioned,A,In a walk if the vertices are distinct it is called a path
  What is the maximum number of possible non zero values in an adjacency matrix of a simple graph with n vertices?,(n*(n-1))/2,(n*(n+1))/2,n*(n-1),n*(n+1),C,Out of n*n possible values for a simple graph the diagonal values will always be zero.]
- Which of the following is an advantage of adjacency list representation over adjacency matrix representation of a graph?,In adjacency list representation,,,,space is saved for sparse graphs.,DFS and BSF can be done in O(V + E) time for adjacency list representation. These operations take O(V^2) time in adjacency matrix representation. Here is V and E are number of vertices and edges respectively.
 "A connected planar graph having 6 vertices, 7 edges contains  regions",15,3,1,11,B,By eulerâ€™s formula the relation between vertices(n)
 "On which of the following statements does the time complexity of checking if an edge exists between two particular vertices is not, depends?",Depends on the number of edges,Depends on the number of vertices,Is independent of both the number of edges and vertices,It depends on both the number of edges and vertices,C,To check if there is an edge between to vertices i and j
  The degree sequence of a simple graph is the sequence of the degrees of the nodes in the graph in decreasing order,I and II,III and IV,IV only,II and IV,D,No explanation]
  What is the maximum number of edges in a bipartite graph having 10 vertices?,24,21,25,16,C,Let one set have n vertices another set would contain 10-n vertices.Total number of edges would be n*(10-n)
-" Possible number of labelled simple Directed, Pseudo and Multigarphs exist having 2 vertices?",3,,,,Infinite,
 The most efficient algorithm for finding the number of connected components in an undirected graph on n vertices and m edges has time complexity,A,B,C,D,C,Connected components can be found in O(m + n) using Tarjans algorithm. Once we have connected components
 " What is time complexity to check if a string(length S1) is a substring of another string(length S2) stored in a Directed Acyclic Word Graph, given S2 is greater than S1?",O(S1),O(S2),O(S1+S2),O(1),A,For each check of a word of length S1
  What is the number of edges present in a complete graph having n vertices?,(n*(n+1))/2,(n*(n-1))/2,n,Information given is insufficient,B,Number of ways in which every vertex can be connected to each other is nC2.]
@@ -96,9 +90,7 @@ The most efficient algorithm for finding the number of connected components in a
   Which of the following properties does a simple graph not hold?,Must be connected,Must be unweighted,Must have no loops or multiple edges,All of the mentioned,A,A simple graph maybe connected or disconnected.]
  Which of the following is true?,A graph may contain no edges and many vertices,A graph may contain many edges and no vertices,A graph may contain no edges and no vertices,None of the mentioned,B,A graph must contain at least one vertex.]
 "  For a given graph G having v vertices and e edges which is connected and has no cycles, which of the following statements is true?",v=e,v = e+1,v + 1 = e,None of the mentioned,B,For any connected graph with no cycles the equation holds true.]
- for which of the following combinations of the degrees of vertices would the connected graph be eulerian?,1,,,,2,
   A graph with all vertices having equal degree is known as a,Multi Graph,Regular Graph,Simple Graph,Complete Graph,B,The given statement is the definition of regular graphs.
- Which of the following ways can be used to represent a graph?,Adjacency List and Adjacency Matrix,Incidence Matrix,Adjacency List,,Adjacency Matrix as well as Incidence Matrix,None of the mentioned
  The time complexity to calculate the number of edges in a graph whose information in stored in form of an adjacency matrix is,O(V),O(E2),O(E),O(V2),D,As V entries are 0
  What is a hash table?,A structure that maps values to keys,A structure that maps keys to values,A structure used for storage,A structure used to implement stack and queue,B,A hash table is used to implement associative arrays which has a key-value pair
  How many different insertion sequences of the key values using the same hash function and linear probing will result in the hash table shown above?,10,20,30,40,C,In a valid insertion sequence
@@ -123,7 +115,6 @@ Which of these are core interfaces in the collection framework,Tree,Stack,Queue,
 How many stacks are needed to implement a queue,1,2,3,4,B,A queue can be implemented using two stacks.]
 "In a Queue, if a user tries to remove an element from empty Queue it is called ",Underflow,Empty collection,Overflow,Garbage Collection,A,In a Queue
 " If the elements ""A"", ""B"", ""C"" and ""D"" are placed in a queue and are deleted one at a time, in what order will they be removed?",ABCD,DCBA,DCAB,ABCD,A,Because Queue follow FIFO rule.]
-A priority queue can efficiently implemented using which of the following data structures? Assume that the number of insert and peek (operation to see the current highest priority item) and extraction (remove the highest priority item) operations are almost same,Array,Linked List,Heap Data Structures like Binary Heap,,Fibonacci Heap,None of the above
 " In case of insertion into a linked queue, a node borrowed from the  list is inserted in the queue",AVAIL,FRONT,REAR,None of the mentioned,A,All the nodes are collected in AVAIL list.]
 If the MAXSIZE is the size of the array used in the implementation of circular queue,rear=(rear%1)+MAX_SIZE,rear=rear%(MAX_SIZE+1),rear=(rear+1)%MAX_SIZE,rear=rear+(1%MAX_SIZE),C,No explanation.]
 Suppose a circular queue of capacity (n â€“ 1) elements is implemented with an array of n elements,Full: (REAR+1) mod n == FRONT,,,,empty: REAR == FRONT,Full: (REAR+1) mod n == FRONT
@@ -184,10 +175,10 @@ What is the complexity of adding an element to the heap?,O(log n),O(log h),O(h),
  An array consists of n elements,O(n*n*logn),O(n*logn),O(n*n),O(n *logn *logn),B,The total time taken will be N times the complexity of adding a single element to the heap. And adding a single element takes logN time
  Which one of the following array elements represents a binary min heap?,12 10 8 25 14 17,8 10 12 25 14 17,25 17 14 12 10 8,14 17 25 10 12 8,B Explanation : A tree is min heap when data at every node in the tree is smaller than or equal to itâ€™s childrenâ€™ s data. So,
 " Given an array of element 5, 7, 9, 1, 3, 10, 8, 4",1,,,,3,
- What is the amortized cost per operation of a skew heap?,O(N),O(N log N),O(N2),O(log N),D Explanation : The amortized cost per operation of a skew heap is O(log N) since the worst case analysis of skew heap is O(N) and splay tree is O(M log N).],
  How many alphabets are there in Binary language?,2,3,4,5,A,nary language has only two alphabets
  we write programs in?,Low-Level Language,Middle-Level Language,High-Level Language,Decimal-Format,C,we write programs in high-level language
   is a program that converts high-level language to assembly language,assembler,compiler,interpreter,linker,B,A compiler is a program that converts high-level language to assembly language.]
+ A compiler that runs on platform (A) and is capable of generating executable code for platform (B) is called ?,cross-compiler,complex-compiler,object-compiler,post-compiler,A,A compiler that runs on platform (A) and is capable of generating executable code for platform (B) is called a cross-compiler.]
  Which of the following is used to link all the parts of the program together for execution?,loader,linker,memory,preprocessor,B,A linker tool is used to link all the parts of the program together for execution (executable machine code).]
  Which of the following tool produces input for compilers?,Interpreter,Assembler,Loader,Preprocessor,D,A preprocessor
  Does compiler reads the whole source code at once?,Yes,No,Depends on compiler,Dont know,A,A compiler reads the whole source code at once
@@ -199,12 +190,10 @@ What is the complexity of adding an element to the heap?,O(log n),O(log h),O(h),
  Pandas  key data structure is called?,Keyframe,DataFrame,Statistics,Econometrics,B,Pandas is built on the Numpy package and its key data structure is called the DataFrame.]
 " What will be output for the following code?
 import pandas as pd
-
 s = pd",1,2,3,4,A,Retrieve a single element using index label value.]
 " In pandas, Index values must be?",unique,hashable,Both A and B,None of the above,C,Index values must be unique and hashable
  What will be correct syntax for pandas series?,pandas_Series( data,,,,index,
  Which of the following is correct Features of DataFrame?,Potentially columns are of different types,Can Perform Arithmetic operations on rows and columns,Labeled axes (rows and columns),All of the above,D,All the above are feature of dataframe.]
- What will be syntax for pandas dataframe?,pandas.DataFrame( data,,,,index,
  A panel is a  container of data,1D,2D,3D,Infinite,C,A panel is a 3D container of data. The term Panel data is derived from econometrics and is partially responsible for the name pandas : pan(el)-da(ta)-s.]
 " Axis 1, in panel represent?",minor_axis,major_axis,items,None of the above,B,major_axis : axis 1
  Which of the following is true?,If data is an ndarray,,,,index must be the same length as data.,Series is a one-dimensional labeled array capable of holding any data type.

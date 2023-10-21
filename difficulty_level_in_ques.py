@@ -31,6 +31,14 @@ def preprocess_text(text):
     
 
 # calculate difficulty
+def categorize_difficulty(score):
+    if score <= 10:
+        return "easy"
+    elif score <= 20:
+        return "medium"
+    else:
+        return "hard"
+
 def scale_difficulty(dataframe):
     difficulty_scores = []
 
@@ -46,12 +54,17 @@ def scale_difficulty(dataframe):
                 difficulty_score += 0.5
         difficulty_scores.append(difficulty_score)
 
-    # Scale the difficulty scores to a 0-10 range
-    scaled_difficulty_scores = [int(score) for score in difficulty_scores]
+    # Scale the difficulty scores to a 0-30 range
+    scaled_difficulty_scores = [(score / max(difficulty_scores)) * 30 for score in difficulty_scores]
 
     # Assign the scaled difficulty scores to the questions.
     dataframe["difficulty_level"] = scaled_difficulty_scores
+
+    # Categorize the difficulty levels
+    dataframe["difficulty_category"] = dataframe["difficulty_level"].apply(categorize_difficulty)
+
     return dataframe
+
 
 
 for dataframe in [mcq_data,oline_data,tf_data,oword_data]:

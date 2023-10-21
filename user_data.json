@@ -1,0 +1,71 @@
+[
+  {
+    "username": "jasmine",
+    "password": "jasmine",
+    "quiz_data": [
+      {
+        "quiz_type": "TrueFalse",
+        "score": 0,
+        "date": "2023-10-18 16:16:38"
+      },
+      {
+        "quiz_type": "TrueFalse",
+        "score": 8,
+        "date": "2023-10-18 16:22:29"
+      },
+      {
+        "quiz_type": "MCQ",
+        "score": 4,
+        "date": "2023-10-18 16:23:12"
+      },
+      {
+        "quiz_type": "MCQ",
+        "score": 3,
+        "date": "2023-10-18 17:19:40"
+      },
+      {
+        "quiz_type": "TrueFalse",
+        "score": 3,
+        "date": "2023-10-18 17:44:21"
+      },
+      {
+        "quiz_type": "OneLiner",
+        "score": 2,
+        "date": "2023-10-18 17:53:45"
+      },
+      {
+        "quiz_type": "MCQ",
+        "score": 7,
+        "date": "2023-10-19 16:03:32"
+      },
+      {
+        "quiz_type": "MCQ",
+        "score": 4,
+        "date": "2023-10-19 16:05:50"
+      }
+    ]
+  },
+  {
+    "username": "user",
+    "password": "user"
+  },
+  {
+    "username": "hello",
+    "password": "world"
+  },
+  {
+    "username": "Akshat",
+    "password": "12345"
+  },
+  {
+    "username": "",
+    "password": "",
+    "quiz_data": [
+      {
+        "quiz_type": "TrueFalse",
+        "score": 2,
+        "date": "2023-10-18 17:50:23"
+      }
+    ]
+  }
+]
