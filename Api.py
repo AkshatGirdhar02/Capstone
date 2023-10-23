@@ -5,7 +5,7 @@ from difficulty_level_in_ques import mcq_data, oline_data, oword_data, tf_data
 import pandas as pd
 
 app = Flask(__name__)
-CORS(app)  # for react
+CORS(app)  
 
 def handle_nan(value):
     return '' if pd.isna(value) else value
@@ -16,18 +16,19 @@ questions = {
     'OneWord': oword_data.applymap(handle_nan).to_dict(orient='records'),
     'OneLiner': oline_data.applymap(handle_nan).to_dict(orient='records')
 }
-
-answer=[]
+actualAnswers=[]
+questions_asked=[]
 @app.route('/check_answers',methods=['POST'])
 def check_answers():
-    score=0
-    ans=request.args.getlist("answer")
-    for i in range(len(ans)):
-        print("ans",ans[i])
-        print("answer",answer[i]['answer'])
-        if(ans[i]==answer[i]['answer']):
+    data = request.json
+    user_answer = data.get("answers",[]) 
+    print(actualAnswers)
+    score = 0
+    for i in range(len(user_answer)):
+        if user_answer[i]==actualAnswers[i]:
             score+=1
-    return jsonify({"score":score})
+    return jsonify({"score": score,"questions":questions_asked,"user_answer":user_answer,"actual_answer":actualAnswers})
+
 
 def get_random_question(question_type=None,difficulty=None):
     ques=[]
@@ -39,19 +40,17 @@ def get_random_question(question_type=None,difficulty=None):
                 question_without_answer = {key: value for key, value in q.items() if key != 'answer'}
                 ques.append(question_without_answer)
                 ans={key:value for key, value in q.items() if key=='answer'}
-                answer.append(ans)
+                answer.append(ans['answer'])
     return [ques,answer]
 
 @app.route('/random_question', methods=['GET'])
 def random_question():
     question_type = request.args.get('type')
     difficulty = request.args.get('difficulty')
-    [question,ans] = get_random_question(question_type,difficulty)
-    print("--------------------")
-    print("ans",ans)
-    global answer
-    answer=ans
-    print("-------------------")
+    [question,actualans] = get_random_question(question_type,difficulty)
+    global actualAnswers, questions_asked
+    actualAnswers=actualans
+    questions_asked=question
     return jsonify(question)
 
 if __name__ == '__main__':

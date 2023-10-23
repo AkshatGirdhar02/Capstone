@@ -9,6 +9,7 @@ import OneWord from './components/Questions/OneWord';
 import Random from './components/Questions/Random';
 import Result from './components/Result';
 import Difficulty_level from './components/Difficulty_page';
+import ScorePage from './components/ScorePage';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -25,6 +26,7 @@ const App = () => {
       <Route path="/Random" element={loggedIn ? <Random/> : <Navigate to="/home" />} />
       <Route path="/Result" element={loggedIn ? <Result/> : <Navigate to="/home" />} />
       <Route path="/Difficulty" element={loggedIn ? <Difficulty_level/> : <Navigate to="/home" />} />
+      <Route path="/ScorePage" element={loggedIn ? <ScorePage/> : <Navigate to="/home" />} />
       <Route path="*" element={<Login setLoggedIn={setLoggedIn} setUser={setUsername}/>}/>
       </Routes>
     </BrowserRouter>
