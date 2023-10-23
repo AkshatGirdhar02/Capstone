@@ -7,12 +7,13 @@ function Home({ username }) {
   const navigate = useNavigate();
 
   const handleButton = (type) => {
-    if (type === "MCQ") navigate(`/MCQ?username=${username}`, { replace: true });
-    if (type === "TrueFalse") navigate(`/TrueFalse?username=${username}`, { replace: true });
-    if (type === "OneLiner") navigate(`/OneLiner?username=${username}`, { replace: true });
-    if (type === "OneWord") navigate(`/OneWord?username=${username}`, { replace: true });
-    if (type === "Random") navigate(`/Random?username=${username}`, { replace: true });
-    if (type === "Result") navigate(`/Result?username=${username}`,{replace:true});
+    navigate(`/Difficulty?type=${type}&username=${username}`)
+    // navigate(`/${type}?username=${username}`, { replace: true });
+    // if (type === "TrueFalse") navigate(`/TrueFalse?username=${username}`, { replace: true });
+    // if (type === "OneLiner") navigate(`/OneLiner?username=${username}`, { replace: true });
+    // if (type === "OneWord") navigate(`/OneWord?username=${username}`, { replace: true });
+    // if (type === "Random") navigate(`/Random?username=${username}`, { replace: true });
+    // if (type === "Result") navigate(`/Result?username=${username}`,{replace:true});
   };
 
   return (
