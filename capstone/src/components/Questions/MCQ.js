@@ -50,7 +50,7 @@ function MCQ() {
 
   const handleQuizSubmit = () => {
     console.log("answers",answers)
-    navigate(`/ScorePage`,{state:answers})    
+    navigate(`/ScorePage?username=${username}&type=${type}`,{state:answers})    
   }
 
   const answerButtonStyle = {

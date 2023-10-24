@@ -1,175 +1,138 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate,useLocation } from "react-router-dom";
-import '../../App.css'
-import PieChart from "../Charts/PieChart";
-import BarChart from "../Charts/Barchart";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import QuestionNavigation from "./QuestionNavigation"; // Import the QuestionNavigation component
 
 const OneWord = () => {
-    const location = useLocation();
-  const username = new URLSearchParams(location.search).get('username');
-  
   const navigate = useNavigate();
-  const [oneWordQuestion, setOneWordQuestion] = useState(null);
-  const [userAnswer, setUserAnswer] = useState('');
-  const [answerFeedback, setAnswerFeedback] = useState('');
-  const [userScore, setUserScore] = useState(0);
-  const [totalQuestions, setTotalQuestions] = useState(5);
-  const [isAnswerChecked, setIsAnswerChecked] = useState(false);
-  const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(true);
-  const [easy, setEasy] = useState(0);
-  const [med, setMed] = useState(0);
-  const [hard, setHard] = useState(0)
-
-  const saveQuizData = async () => {
-    try {
-      const response = await axios.post('http://localhost:5000/api/saveQuizData', {
-        username: username,  // Replace with the actual username or retrieve it from user authentication
-        score: userScore,
-        quesType:"OneWord"
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error saving quiz data', error.message);
-    }
-    navigate("/home")
-  };
-
-  const goback = () => {
-    navigate('/home');
-  };
-
-  useEffect(() => {
-    console.log('Fetching OneWord question...');
-
-    // Fetch a random OneWord question from the API
-    axios.get('http://127.0.0.1:5001/random_question?type=OneWord')
-      .then((response) => {
-        console.log('OneWord question response:', response.data);
-        setOneWordQuestion(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching OneWord question', error);
-      });
-  }, []);
-
-const handleCheckAnswer = (difficulty_category) => {
-    console.log("HELLOE",userAnswer)
-    const trimmedUserAnswer = userAnswer.trim().toLowerCase();
-    console.log("Trimmed",trimmedUserAnswer)
-    const trimmedCorrectAnswer = oneWordQuestion.answer.trim().toLowerCase();
-    if (trimmedUserAnswer === trimmedCorrectAnswer) {
-      setAnswerFeedback('Correct answer!');
-      setUserScore(userScore + 1);
-      if (difficulty_category === "easy") setEasy(easy + 1);
-      if (difficulty_category === "medium") setMed(med + 1);
-      if (difficulty_category === "hard") setHard(hard + 1);
-    } else {
-      setAnswerFeedback(`Wrong answer. Correct answer is: ${oneWordQuestion.answer}`);
-    }
+  const location = useLocation();
+  const type = new URLSearchParams(location.search).get('type');
+  const difficulty = new URLSearchParams(location.search).get('difficulty');
+  const username = new URLSearchParams(location.search).get('username');
+  const [question_bank, setQuestions] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState(Array(10).fill(null)); // Initialize answers with 15 null values
+  const [selectedAnswer, setSelectedAnswer] = useState(""); // State to track the selected answer
   
-    setIsAnswerChecked(true);
-    setIsNextButtonDisabled(false);
+  const questions = async () => {
+    const response = await axios.get(`http://127.0.0.1:5001/random_question?type=${type}&difficulty=${difficulty}`);
+    setQuestions(response.data);
+    console.log(response.data);
   };
-  
-  
 
   const handleNextQuestion = () => {
-    if (totalQuestions === 0) {
-      setOneWordQuestion(null); // No more questions to fetch
-    } else {
-      axios.get('http://127.0.0.1:5001/random_question?type=OneWord')
-        .then((response) => {
-          setOneWordQuestion(response.data);
-          // Clear the user's answer and answer feedback, and enable the input field
-          setUserAnswer('');
-          setAnswerFeedback('');
-          setIsAnswerChecked(false);
-          setIsNextButtonDisabled(true); // Disable the "Next" button again
-          setTotalQuestions(totalQuestions - 1);
-        })
-        .catch((error) => {
-          console.error('Error fetching OneWord question', error);
-        });
+    if (currentQuestion < 9) {
+      if (selectedAnswer !== null) {
+        const updatedAnswers = [...answers];
+        updatedAnswers[currentQuestion] = selectedAnswer;
+        setAnswers(updatedAnswers);
+        // setSelectedAnswer(""); // Clear the selected answer
+      }
+      setCurrentQuestion(currentQuestion + 1);
     }
   };
-  
-const handleSpeechRecognition = () => {
+
+  const handlePreviousQuestion = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
+  };
+
+  const handleAnswerChange = (e) => { 
+    setSelectedAnswer(e.target.value);
+  };
+
+  const handleSpeechRecognition = () => {
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
       const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
       recognition.continuous = false;
       recognition.interimResults = false;
-  
+
       recognition.onresult = (event) => {
         const result = event.results[0][0].transcript;
-        setUserAnswer(result);
+        setSelectedAnswer(result);
       };
-  
+
       recognition.onend = () => {
         recognition.stop();
       };
-  
+
       recognition.start();
     } else {
       alert('Speech recognition is not supported in your browser.');
     }
   };
 
-return (
+  const handleQuizSubmit = () => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[currentQuestion] = selectedAnswer;
+    setAnswers(updatedAnswers);
+    navigate(`/ScorePage?username=${username}&type=${type}`, { state: answers });
+  };
+  
+  const handleAnswerSubmit = (answer) => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[currentQuestion] = answer;
+    setAnswers(updatedAnswers);
+    console.log(updatedAnswers)
+    // handleNextQuestion(); // Automatically go to the next question
+    setSelectedAnswer(answer); // Highlight the selected answer
+
+  }
+
+  useEffect(() => {
+    questions();
+  }, [type, difficulty]);
+
+  if (question_bank.length === 0) {
+    return <p>Loading...</p>;
+  }
+  
+  const currentQuestionData = question_bank[currentQuestion];
+
+  return (
     <div>
-      {oneWordQuestion ? (
-        <div>
-          <h2>OneWord Question</h2>
-          <h3>{oneWordQuestion.difficulty_category}</h3>
-          <p>{oneWordQuestion.question}</p>
-          <input
-            type="text"
-            placeholder="Enter your answer"
-            value={userAnswer}
-            onChange={(e) => setUserAnswer(e.target.value)}
-            disabled={isAnswerChecked}
-          />
-          <button onClick={()=>handleCheckAnswer(oneWordQuestion.difficulty_category)}>Check Answer</button>
-          <button onClick={handleNextQuestion} disabled={isNextButtonDisabled}>Next</button>
-          <button onClick={handleSpeechRecognition}>Speech Input</button>
-          <p>Score: {userScore}</p>
-          {answerFeedback && <p>{answerFeedback}</p>}
-        </div>
-      ) : (
-        totalQuestions === 0 ? (
-           <div>
-                <h1>{username}! Here's Your Score:</h1>
-              <h2>Quiz is Over! Total Score is: {userScore}</h2>
-              <h2>Easy: {easy} Med: {med} Hard: {hard}</h2>
-              <div>
-              <h1>Progess Graphs</h1>
-                <PieChart
-                  data={[
-                    ["Progress", "% of correct answer"],
-                    ["Easy", easy],
-                    ["Medium", med],
-                    ["Hard", hard],
-                  ]}
-                />
-                <BarChart
-                  data={[
-                    ["Difficulty Level", "total No of questions"],
-                    ["Easy", easy],
-                    ["Medium", med],
-                    ["Hard", hard],
-                  ]}
-                />
-              </div>
-                <button onClick={saveQuizData}>Save Quiz Data</button>
-              <button onClick={goback}>Go Back to Main Menu</button>
-            </div>
-        ) : (
-          <p>Loading...</p>
-        )
+      <h3>Question {currentQuestion + 1}</h3>
+      <p>{currentQuestionData.question}</p>
+
+      <div style={{ marginBottom: "20px" }}>
+        <input
+          type="text"
+          placeholder="Enter your answer"
+          value={selectedAnswer}
+          onChange={handleAnswerChange}
+        />
+        <button onClick={handleSpeechRecognition}>Speech Input</button>
+        <button
+          
+          onClick={() => handleAnswerSubmit(selectedAnswer)}
+        >
+          Save
+        </button>
+      </div>
+
+      {/* Navigation bar */}
+      <div style={{ marginBottom: "20px" }}>
+        <QuestionNavigation
+          totalQuestions={question_bank.length}
+          currentQuestion={currentQuestion}
+          setCurrentQuestion={setCurrentQuestion}
+          selectedAnswers={answers}
+        />
+      </div>
+
+
+
+{/* Buttons for next previous */}
+      <div style={{ marginTop: "20px" }}>
+        <button onClick={handlePreviousQuestion}>Previous Question</button>
+        <button onClick={handleNextQuestion}>Next Question</button>
+      </div>
+      {currentQuestion === 9 && (
+        <button onClick={handleQuizSubmit}>Submit Quiz</button>
       )}
     </div>
   );
-        }  
+};
 
 export default OneWord;

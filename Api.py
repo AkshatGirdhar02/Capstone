@@ -25,7 +25,10 @@ def check_answers():
     print(actualAnswers)
     score = 0
     for i in range(len(user_answer)):
-        if user_answer[i]==actualAnswers[i]:
+        if user_answer[i] in [True,False,None]:
+            if user_answer[i]== actualAnswers[i]:
+                score+=1
+        elif user_answer[i].lower()== actualAnswers[i].lower():
             score+=1
     return jsonify({"score": score,"questions":questions_asked,"user_answer":user_answer,"actual_answer":actualAnswers})
 
@@ -33,14 +36,16 @@ def check_answers():
 def get_random_question(question_type=None,difficulty=None):
     ques=[]
     answer=[]
-    while len(ques)<15:
+    while len(ques)<10:
         if question_type and question_type in questions:
             q=random.choice(questions[question_type])
             if q['difficulty_category']==difficulty:
                 question_without_answer = {key: value for key, value in q.items() if key != 'answer'}
-                ques.append(question_without_answer)
-                ans={key:value for key, value in q.items() if key=='answer'}
-                answer.append(ans['answer'])
+                if question_without_answer not in ques :
+                    ques.append(question_without_answer)
+                    ans={key:value for key, value in q.items() if key=='answer'}
+                    answer.append(ans['answer'])
+
     return [ques,answer]
 
 @app.route('/random_question', methods=['GET'])
