@@ -75,6 +75,22 @@
         "quiz_type": "TrueFalse",
         "score": 0,
         "date": "2023-10-24 16:28:37"
+      },
+      {
+        "quiz_type": "TrueFalse",
+        "score": 6,
+        "date": "2023-10-27 13:09:58"
+      }
+    ]
+  },
+  {
+    "username": "jbatra_be20@thapar.edu",
+    "password": "",
+    "quiz_data": [
+      {
+        "quiz_type": "TrueFalse",
+        "score": 3,
+        "date": "2023-10-27 14:01:31"
       }
     ]
   }

@@ -11,7 +11,7 @@ function TrueFalse() {
   const username = new URLSearchParams(location.search).get('username');
   const [question_bank, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState(Array(15).fill(null)); // Initialize answers with 15 null values
+  const [answers, setAnswers] = useState(Array(10).fill(null)); // Initialize answers with 15 null values
   const [selectedAnswer, setSelectedAnswer] = useState(null); // State to track the selected answer
 
   const questions = async () => {
@@ -116,7 +116,7 @@ function TrueFalse() {
         <button onClick={handlePreviousQuestion}>Previous Question</button>
         <button onClick={handleNextQuestion}>Next Question</button>
       </div>
-      {currentQuestion === 14 && (
+      {currentQuestion === 9 && (
         <button onClick={handleQuizSubmit}>Submit Quiz</button>
       )}
     </div>
